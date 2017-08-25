@@ -2,7 +2,8 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -26,9 +27,17 @@
             <ul class="nav navbar-nav navbar-{{ App::getLocale() === 'ar'? 'left': 'right' }}">
                 <li><a href="#">Link</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">{{ Lang::get('language.lang') }} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
+                        @if (App::getLocale() !== 'en')
+                            <li><a href="{{ URL::route('language-switcher', 'en') }}">{{ Lang::get('language.en') }}</a>
+                            </li>
+                        @endif
+                        @if (App::getLocale() !== 'ar')
+                            <li><a href="{{ URL::route('language-switcher', 'ar') }}">{{ Lang::get('language.ar') }}</a>
+                            </li>
+                        @endif
                         <li><a href="#">Another action</a></li>
                         <li><a href="#">Something else here</a></li>
                         <li role="separator" class="divider"></li>
