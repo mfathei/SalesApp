@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html lang="{{ config('app.locale') }}">
+<html lang="{{ Config::get('languages')[App::getLocale()] }}">
 
 @include('layouts.header')
 

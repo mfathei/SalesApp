@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+// lang
+
+Route::get('language/{lang}', array(
+    'before' => 'csrf',
+    'as'     => 'language-switcher',
+    'uses'   => 'LanguageController@chooser'
+));

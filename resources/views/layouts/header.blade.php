@@ -13,8 +13,13 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
 
+    @if (App::getLocale() =='ar')
+        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <link href="{{ asset('css/bootstrap-rtl.css') }}" rel="stylesheet">
+    @endif
 
-    <!-- Styles -->
+
+<!-- Styles -->
     <style>
         html, body {
             background-color: #fff;
