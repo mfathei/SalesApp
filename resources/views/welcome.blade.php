@@ -3,21 +3,63 @@
 
 @section('content')
 
-    <br><br><br>
-    <br><br><br>
-    <form action="{{  route('language-switcher', 'ar')  }}" method="get">
-        {{ csrf_field() }}
-        <select name="locale" id="locale">
-            <option value="en">English</option>
-            <option value="ar"{{ Lang::locale() === 'ar'? ' selected': '' }}>Arabic</option>
-        </select>
-        <input type="submit" value="Choose">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">{{ Lang::get('dashboard.dashboard') }}</div>
 
-    </form>
-
-
-    <h3>{{ trans('home.Hello') }} SalesApp</h3>
-    <a class="text-center" href="{{ route('language-switcher', 'en') }}">English</a>
-<h2>{{ App::getLocale() }}</h2>
+                <div class="panel-body">
+                    <div class="col-sm-3">
+                        <a href="images/mbuntu-0.jpg" class="thumbnail" title="{{ Lang::get('dashboard.invoices') }}">
+                            <p>{{ Lang::get('dashboard.invoices') }}</p>
+                            <img src="images/mbuntu-0.jpg"/>
+                        </a>
+                    </div>
+                    <div class="col-sm-3">
+                        <a href="images/mbuntu-0.jpg" class="thumbnail" title="{{ Lang::get('dashboard.transaction') }}">
+                            <p>{{ Lang::get('dashboard.transaction') }}</p>
+                            <img src="images/mbuntu-0.jpg"/>
+                        </a>
+                    </div>
+                    <div class="col-sm-3">
+                        <a href="images/mbuntu-0.jpg" class="thumbnail" title="{{ Lang::get('dashboard.items') }}">
+                            <p>{{ Lang::get('dashboard.items') }}</p>
+                            <img src="images/mbuntu-0.jpg"/>
+                        </a>
+                    </div>
+                    <div class="col-sm-3">
+                        <a href="images/mbuntu-0.jpg" class="thumbnail" title="{{ Lang::get('dashboard.customers') }}">
+                            <p>{{ Lang::get('dashboard.customers') }}</p>
+                            <img src="images/mbuntu-0.jpg"/>
+                        </a>
+                    </div>
+                    <div class="col-sm-3">
+                        <a href="images/mbuntu-0.jpg" class="thumbnail" title="{{ Lang::get('dashboard.suppliers') }}">
+                            <p>{{ Lang::get('dashboard.suppliers') }}</p>
+                            <img src="images/mbuntu-0.jpg"/>
+                        </a>
+                    </div>
+                    <div class="col-sm-3">
+                        <a href="images/mbuntu-0.jpg" class="thumbnail" title="{{ Lang::get('dashboard.reports') }}">
+                            <p>{{ Lang::get('dashboard.reports') }}</p>
+                            <img src="images/mbuntu-0.jpg"/>
+                        </a>
+                    </div>
+                    <div class="col-sm-3">
+                        <a href="images/mbuntu-0.jpg" class="thumbnail" title="{{ Lang::get('dashboard.settings') }}">
+                            <p>{{ Lang::get('dashboard.settings') }}</p>
+                            <img src="images/mbuntu-0.jpg"/>
+                        </a>
+                    </div>
+                    <div class="col-sm-3">
+                        <a href="images/mbuntu-0.jpg" class="thumbnail" title="{{ Lang::get('dashboard.about') }}">
+                            <p>{{ Lang::get('dashboard.about') }}</p>
+                            <img src="images/mbuntu-0.jpg"/>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection
