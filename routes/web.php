@@ -23,3 +23,7 @@ Route::get('language/{lang}', array(
     'as'     => 'language-switcher',
     'uses'   => 'LanguageController@chooser'
 ));
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

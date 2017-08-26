@@ -6,7 +6,7 @@
     <br><br><br>
     <br><br><br>
     <form action="{{  route('language-switcher', 'ar')  }}" method="get">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        {{ csrf_field() }}
         <select name="locale" id="locale">
             <option value="en">English</option>
             <option value="ar"{{ Lang::locale() === 'ar'? ' selected': '' }}>Arabic</option>
