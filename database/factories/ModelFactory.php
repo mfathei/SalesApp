@@ -22,3 +22,19 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Customer::class, function (Faker\Generator $faker) {
+
+    return [
+        'name' => $faker->name,
+        'email' => $faker->unique()->email,
+        'phone' => $faker->phoneNumber,
+        'fax' => $faker->phoneNumber,
+        'address' => $faker->address,
+        'first_balance' => $faker->numberBetween(0,2000),
+        'balance'=> $faker->numberBetween(0,100),
+        'limit'=> $faker->numberBetween(1000,100000),
+        'notes' => $faker->text
+    ];
+});

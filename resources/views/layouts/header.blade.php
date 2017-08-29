@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="dataTables/css/jquery.dataTables.min.css">
 
     @if (App::getLocale() =='ar')
         <link href="{{ asset('css/bootstrap-rtl.css') }}" rel="stylesheet">

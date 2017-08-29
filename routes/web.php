@@ -27,3 +27,8 @@ Route::get('language/{lang}', array(
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/invoices', 'InvoicesController@dashboard');
+
+// customers
+Route::get('/customers', 'CustomerController@index');

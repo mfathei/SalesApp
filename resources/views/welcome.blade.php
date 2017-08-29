@@ -10,7 +10,7 @@
 
                 <div class="panel-body">
                     <div class="col-sm-3">
-                        <a href="images/mbuntu-0.jpg" class="thumbnail" title="{{ Lang::get('dashboard.invoices') }}">
+                        <a href="invoices" class="thumbnail" title="{{ Lang::get('dashboard.invoices') }}">
                             <p>{{ Lang::get('dashboard.invoices') }}</p>
                             <img src="images/mbuntu-0.jpg"/>
                         </a>
@@ -28,7 +28,7 @@
                         </a>
                     </div>
                     <div class="col-sm-3">
-                        <a href="images/mbuntu-0.jpg" class="thumbnail" title="{{ Lang::get('dashboard.customers') }}">
+                        <a href="/customers" class="thumbnail" title="{{ Lang::get('dashboard.customers') }}">
                             <p>{{ Lang::get('dashboard.customers') }}</p>
                             <img src="images/mbuntu-0.jpg"/>
                         </a>
