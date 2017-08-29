@@ -9,10 +9,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">
-                <img alt="Brand" class="img-responsive" src="images/brand.png">
+            <a class="navbar-brand" href="/">
+                <img alt="Brand" class="img-responsive" src="/images/brand.png">
             </a>
-            <a class="navbar-brand brand" href="#">
+            <a class="navbar-brand brand" href="/">
                 SalesApp
             </a>
         </div>

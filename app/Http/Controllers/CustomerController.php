@@ -48,9 +48,11 @@ class CustomerController extends Controller
      * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show(Customer $customer)
+    public function show($id)
     {
         //
+        $customer = DB::table('customers')->where('id', $id)->first();
+        return view('customers.edit', array('customer' => $customer));
     }
 
     /**
@@ -82,8 +84,11 @@ class CustomerController extends Controller
      * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Customer $customer)
+    public function destroy($id)
     {
         //
+        DB::table('customers')->where('id', $id)->delete();
+
+        return redirect('/customers');
     }
 }

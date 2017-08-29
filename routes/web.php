@@ -32,3 +32,5 @@ Route::get('/invoices', 'InvoicesController@dashboard');
 
 // customers
 Route::get('/customers', 'CustomerController@index');
+Route::get('/customers/delete/{id}', 'CustomerController@destroy');
+Route::get('/customers/edit/{id}', 'CustomerController@show');

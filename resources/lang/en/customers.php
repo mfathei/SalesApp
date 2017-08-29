@@ -1,5 +1,9 @@
 <?php
 
 return [
-    'title' => 'Customers'
+    'title' => 'Customers',
+    'add'   => 'Add Customer',
+    'delete' => 'delete customer',
+    'edit' => 'edit customer',
+
 ];
