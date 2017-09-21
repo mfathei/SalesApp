@@ -11,6 +11,9 @@
 |
 */
 
+//use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Auth;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -33,4 +36,5 @@ Route::get('/invoices', 'InvoicesController@dashboard');
 // customers
 Route::get('/customers', 'CustomerController@index');
 Route::get('/customers/delete/{id}', 'CustomerController@destroy');
-Route::get('/customers/edit/{id}', 'CustomerController@show');
+Route::get('/customers/edit/{id}', 'CustomerController@edit');
+Route::post('/customers/update/{id}', 'CustomerController@update');

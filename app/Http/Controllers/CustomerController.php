@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
+
+
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -45,37 +51,38 @@ class CustomerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Customer  $customer
+     * @param  Int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         //
-        $customer = DB::table('customers')->where('id', $id)->first();
-        return view('customers.edit', array('customer' => $customer));
+        dd(Customer::find($id));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Customer  $customer
+     * @param  Int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Customer $customer)
+    public function edit($id)
     {
-        //
+        $customer = DB::table('customers')->where('id', $id)->first();
+        return view('customers.edit', array('customer' => $customer));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customer $customer)
+    public function update(Request $request)
     {
         //
+
+        dd(request('active'));
     }
 
     /**
