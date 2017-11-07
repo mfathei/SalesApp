@@ -19,34 +19,60 @@
     <hr/>
     <div class="row">
         <div class="col-sm-12">
-            <table id="custs_table" class="table table-responsive table-striped hover row-border" cellspacing="0"
-                   width="100%">
+            <table id="custs_table" class="display" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th>ID</th>
+<!--                     <th>ID</th>
                     <th>Name</th>
                     <th>Address</th>
                     <th>Email</th>
                     <th>Phone</th>
 
-
                     <th>Status</th>
-                    <th>Action</th>
+                    <th>Action</th> -->
+                    <th>id</th>
+					<th>name</th>
+					<th>address</th>
+					<th>email</th>
+					<th>phone</th>
+					<th>fax</th>
+					<th>first_balance</th>
+					<th>balance</th>
+					<th>limit</th>
+					<th>notes</th>
+					<th>active</th>
+					<th>created_at</th>
+					<th>updated_at</th>
+					<th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
 
-                @foreach($customers as $customer)
+                <!-- @foreach($customers as $customer) -->
                     <tr>
-                        <td>{{ $customer->id }}</td>
+              <!--           <td>{{ $customer->id }}</td>
                         <td>{{ $customer->name }}</td>
                         <td>{{ $customer->address }}</td>
                         <td>{{ $customer->email }}</td>
                         <td>{{ $customer->phone }}</td>
 
-                        <td>{{ $customer->active ? 'Active': 'InActive' }}</td>
+                        <td>{{ $customer->active ? 'Active': 'InActive' }}</td> -->
+
+                        <td>id</td>
+						<td>name</td>
+						<td>address</td>
+						<td>email</td>
+						<td>phone</td>
+						<td>fax</td>
+						<td>first_balance</td>
+						<td>balance</td>
+						<td>limit</td>
+						<td>notes</td>
+						<td>active</td>
+						<td>created_at</td>
+						<td>updated_at</td>
                         <td align="center">
-                            <a href="/customers/edit/{{ $customer->id  }}" title="{{ Lang::get('customers.edit') }}">
+<!--                             <a href="/customers/edit/{{ $customer->id  }}" title="{{ Lang::get('customers.edit') }}">
                                 <span class="glyphicon glyphicon-edit"></span>
                             </a>
 
@@ -54,12 +80,12 @@
                                title="{{ Lang::get('customers.delete') }}">
                                 <span class="glyphicon glyphicon-trash"
                                       onclick="return confirm('Are you sure?')"></span>
-                            </a>
+                            </a> -->
 
                         </td>
                     </tr>
 
-                @endforeach
+                <!-- @endforeach -->
 
                 </tbody>
             </table>
@@ -75,11 +101,71 @@
 
     <script>
         $(document).ready(function () {
-            $('#custs_table').DataTable({
+            var tbl = $('#custs_table').DataTable({
+            	// "scrollX": true, // horizontal scroll
+            	"columnDefs": [
+		            {
+		                "targets": [ 6 ],// first_balance
+		                "visible": false,
+		                "searchable": false
+		            },
+		            {
+		                "targets": [ 12 ],// updated_at
+		                "visible": false,
+		                "searchable": false
+		            },
+		            {
+		                "targets": [ 9 ],// notes
+		                "visible": false,
+		                // "searchable": true // default
+		            },
+		            {
+		                "targets": [ 13 ],// action
+		                "orderable": false,
+		                "searchable": false,
+		                "data": null,
+		                "defaultContent":  "&nbsp;&nbsp;<a class='edit' href='javascript: ;' title='edit'><span class='glyphicon glyphicon-edit'></span>&nbsp;&nbsp;</a><a class='delete' href='javascript: ;' title='delete'><span class='glyphicon glyphicon-trash'></span></a>"
+		            }
+        		],
                 "language": {
                     "url": "<?php echo $langUrl; ?>"
-                }
+                },
+                "processing": true,
+                "serverSide": true,
+                "ajax": {
+                	"url": '/customersgrid'
+                },
+                "deferRender": true
             });
+
+            // select row
+			$('#custs_table tbody').on( 'click', 'tr', function () {
+			    if ( $(this).hasClass('selected') ) {
+		            $(this).removeClass('selected');
+		        }
+		        else {
+		            tbl.$('tr.selected').removeClass('selected');
+		            $(this).addClass('selected');
+		        }
+	        } );
+
+			// edit and delete icons for each row
+            $('#custs_table tbody').on( 'click', 'a', function () {
+		        var data = tbl.row( $(this).parents('tr') ).data();
+		        // alert( data[0] +"'s salary is: "+ data[ 5 ] );
+		        console.log($(this).attr('class'));
+		        if($(this).attr('class') === 'edit'){
+		        	window.location.href = "/customers/edit/" + data[0];
+		        }
+
+		        if($(this).attr('class') === 'delete'){
+		        	if (confirm('Are you sure? id : ' + data[0])){
+		        		window.location.href = "/customers/delete/" + data[0];
+		        	}
+		        }
+
+		    } );
+
         });
     </script>
 

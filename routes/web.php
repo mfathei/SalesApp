@@ -38,3 +38,6 @@ Route::get('/customers', 'CustomerController@index');
 Route::get('/customers/delete/{id}', 'CustomerController@destroy');
 Route::get('/customers/edit/{id}', 'CustomerController@edit');
 Route::post('/customers/update/{id}', 'CustomerController@update');
+
+// customers grid
+Route::get('/customersgrid', 'CustomerController@grid');
