@@ -18,4 +18,7 @@ return [
     'edit_active' => 'مفعل',
     'edit_submit' => 'حفظ',
     'edit_title' => 'بيانات العميل',
+    'th_created' => 'تاريخ التسجيل',
+    'th_updated' => 'تاريخ التعديل',
+    'th_action' => 'اعدادات',
 ];

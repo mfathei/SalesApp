@@ -22,28 +22,21 @@
             <table id="custs_table" class="display" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-<!--                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Email</th>
-                    <th>Phone</th>
 
-                    <th>Status</th>
-                    <th>Action</th> -->
-                    <th>id</th>
-					<th>name</th>
-					<th>address</th>
-					<th>email</th>
-					<th>phone</th>
-					<th>fax</th>
-					<th>first_balance</th>
-					<th>balance</th>
-					<th>limit</th>
-					<th>notes</th>
-					<th>active</th>
-					<th>created_at</th>
-					<th>updated_at</th>
-					<th>Action</th>
+                    <th>{{ Lang::get('customers.edit_id') }}</th>
+                    <th>{{ Lang::get('customers.edit_name') }}</th>
+                    <th>{{ Lang::get('customers.edit_address') }}</th>
+                    <th>{{ Lang::get('customers.edit_mail') }}</th>
+                    <th>{{ Lang::get('customers.edit_phone') }}</th>
+                    <th>{{ Lang::get('customers.edit_fax') }}</th>
+                    <th>{{ Lang::get('customers.edit_fbal') }}</th>
+                    <th>{{ Lang::get('customers.edit_balance') }}</th>
+                    <th>{{ Lang::get('customers.edit_limit') }}</th>
+                    <th>{{ Lang::get('customers.edit_notes') }}</th>
+                    <th>{{ Lang::get('customers.edit_active') }}</th>
+                    <th>{{ Lang::get('customers.th_created') }}</th>
+                    <th>{{ Lang::get('customers.th_updated') }}</th>
+                    <th>{{ Lang::get('customers.th_action') }}</th>
                 </tr>
                 </thead>
                 <tbody>
