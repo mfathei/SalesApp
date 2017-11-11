@@ -1,6 +1,8 @@
 @extends('layouts.master')
 
 <?php $langUrl = App::getLocale() === 'en' ? 'dataTables/json/English.json' : 'dataTables/json/Arabic.json' ?>
+<?php $search = Lang::get('language.search') ?>
+<?php $actions = Lang::get('customers.th_action') ?>
 
 @section('content')
 
@@ -39,6 +41,24 @@
                     <th>{{ Lang::get('customers.th_action') }}</th>
                 </tr>
                 </thead>
+                <tfoot>
+                <tr>
+                    <th>{{ Lang::get('customers.edit_id') }}</th>
+                    <th>{{ Lang::get('customers.edit_name') }}</th>
+                    <th>{{ Lang::get('customers.edit_address') }}</th>
+                    <th>{{ Lang::get('customers.edit_mail') }}</th>
+                    <th>{{ Lang::get('customers.edit_phone') }}</th>
+                    <th>{{ Lang::get('customers.edit_fax') }}</th>
+                    <th>{{ Lang::get('customers.edit_fbal') }}</th>
+                    <th>{{ Lang::get('customers.edit_balance') }}</th>
+                    <th>{{ Lang::get('customers.edit_limit') }}</th>
+                    <th>{{ Lang::get('customers.edit_notes') }}</th>
+                    <th>{{ Lang::get('customers.edit_active') }}</th>
+                    <th>{{ Lang::get('customers.th_created') }}</th>
+                    <th>{{ Lang::get('customers.th_updated') }}</th>
+                    <th>{{ Lang::get('customers.th_action') }}</th>
+                </tr>
+                </tfoot>
                 <tbody>
 
                 <!-- @foreach($customers as $customer) -->
@@ -92,75 +112,102 @@
 
 @section('script')
 
-    <script>
-        $(document).ready(function () {
-            var tbl = $('#custs_table').DataTable({
-            	// "scrollX": true, // horizontal scroll
-            	"columnDefs": [
-		            {
-		                "targets": [ 6 ],// first_balance
-		                "visible": false,
-		                "searchable": false
-		            },
-		            {
-		                "targets": [ 12 ],// updated_at
-		                "visible": false,
-		                "searchable": false
-		            },
-		            {
-		                "targets": [ 9 ],// notes
-		                "visible": false,
-		                // "searchable": true // default
-		            },
-		            {
-		                "targets": [ 13 ],// action
-		                "orderable": false,
-		                "searchable": false,
-		                "data": null,
-		                "defaultContent":  "&nbsp;&nbsp;<a class='edit' href='javascript: ;' title='edit'><span class='glyphicon glyphicon-edit'></span>&nbsp;&nbsp;</a><a class='delete' href='javascript: ;' title='delete'><span class='glyphicon glyphicon-trash'></span></a>"
-		            }
-        		],
-                "language": {
-                    "url": "<?php echo $langUrl; ?>"
-                },
-                "processing": true,
-                "serverSide": true,
-                "ajax": {
-                	"url": '/customersgrid'
-                },
-                "deferRender": true
-            });
+<script>
+$(document).ready(function() {
+    // Setup - add a text input to each footer cell
+    var actions = "<?php echo $actions; ?>";
+    $('#custs_table tfoot th').each( function () {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="<?php echo $search; ?> '+title+'" />' );
+        if(title == actions){
+            $(this).html( '<input type="text" placeholder="<?php echo $search; ?> '+title+'" disabled />' );
+        }
+    } );
+ 
+    // DataTable
+    var tbl = $('#custs_table').DataTable({
+        // "scrollX": true, // horizontal scroll
+        "columnDefs": [
+            {
+                "targets": [ 6 ],// first_balance
+                "visible": false,
+                "searchable": false
+            },
+            {
+                "targets": [ 12 ],// updated_at
+                "visible": false,
+                "searchable": false
+            },
+            {
+                "targets": [ 9 ],// notes
+                "visible": false,
+                // "searchable": true // default
+            },
+            {
+                "targets": [ 13 ],// action
+                "orderable": false,
+                "searchable": false,
+                "data": null,
+                "defaultContent":  "&nbsp;&nbsp;<a class='edit' href='javascript: ;' title='edit'><span class='glyphicon glyphicon-edit'></span>&nbsp;&nbsp;</a><a class='delete' href='javascript: ;' title='delete'><span class='glyphicon glyphicon-trash'></span></a>"
+            }
+        ],
+        "language": {
+            "url": ""
+        },
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": '/customersgrid'
+        },
+        "deferRender": true
+    });
+ 
+    // select row
+    $('#custs_table tbody').on( 'click', 'tr', function () {
+        if ( $(this).hasClass('selected') ) {
+            $(this).removeClass('selected');
+        }
+        else {
+            tbl.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    } );
+    
+    
+    // edit and delete icons for each row
+    $('#custs_table tbody').on( 'click', 'a', function () {
+        var data = tbl.row( $(this).parents('tr') ).data();
+        // alert( data[0] +"'s salary is: "+ data[ 5 ] );
+        console.log($(this).attr('class'));
+        if($(this).attr('class') === 'edit'){
+            window.location.href = "/customers/edit/" + data[0];
+        }
 
-            // select row
-			$('#custs_table tbody').on( 'click', 'tr', function () {
-			    if ( $(this).hasClass('selected') ) {
-		            $(this).removeClass('selected');
-		        }
-		        else {
-		            tbl.$('tr.selected').removeClass('selected');
-		            $(this).addClass('selected');
-		        }
-	        } );
+        if($(this).attr('class') === 'delete'){
+            if (confirm('Are you sure? id : ' + data[0])){
+                window.location.href = "/customers/delete/" + data[0];
+            }
+        }
 
-			// edit and delete icons for each row
-            $('#custs_table tbody').on( 'click', 'a', function () {
-		        var data = tbl.row( $(this).parents('tr') ).data();
-		        // alert( data[0] +"'s salary is: "+ data[ 5 ] );
-		        console.log($(this).attr('class'));
-		        if($(this).attr('class') === 'edit'){
-		        	window.location.href = "/customers/edit/" + data[0];
-		        }
+    } );
+            
+    // Apply the search
+    tbl.columns().every( function () {
+        var that = this;
+ 
+        $( 'input', this.footer() ).on( 'keyup change', function () {
+            if ( that.search() !== this.value ) {
+                that
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
 
-		        if($(this).attr('class') === 'delete'){
-		        	if (confirm('Are you sure? id : ' + data[0])){
-		        		window.location.href = "/customers/delete/" + data[0];
-		        	}
-		        }
+    $('#custs_table tbody').append('<br/>');
 
-		    } );
-
-        });
-    </script>
+} );
+</script>
 
 @endsection
 

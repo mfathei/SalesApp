@@ -6,17 +6,21 @@ body {
     min-height: 80px;
 }
 
+.container{
+    width: 90%;
+}
+
 .navbar-nav > li > a {
     padding-top: 0px;
     padding-bottom: 0px;
     line-height: 80px;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
 }
 
 @media (max-width: 767px) {
     .navbar-nav > li > a {
-        line-height: 20px;
+        line-height: 10px;
         padding-top: 10px;
         padding-bottom: 10px;}
 }
@@ -37,3 +41,77 @@ body {
     color: white;
 }
 
+
+
+html, body {
+    background-color: #fff;
+    color: #636b6f;
+    font-family: 'Raleway', sans-serif;
+    font-size: 11px;
+    line-height: 1;
+    font-weight: 100;
+    height: 100vh;
+    margin: 0;
+}
+
+.full-height {
+    height: 100vh;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.position-ref {
+    position: relative;
+}
+
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+
+.content {
+    text-align: center;
+}
+
+.title {
+    font-size: 84px;
+}
+
+.links > a {
+    color: #636b6f;
+    padding: 0 25px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.m-b-md {
+    margin-bottom: 30px;
+}
+
+tfoot input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+tfoot {
+    display: table-header-group;
+}
+
+#custs_table tbody{
+    font-size: small;
+    color: #111;
+}
+
+#custs_table table{
+    border-bottom: 1px solid;
+    
+}

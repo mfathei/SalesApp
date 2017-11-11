@@ -3,5 +3,6 @@
 return [
     'lang' => 'Language',
     'en' => 'English',
-    'ar' => 'Arabic'
+    'ar' => 'Arabic',
+    'search' => 'search'
 ];
