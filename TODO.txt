@@ -1,0 +1,1 @@
+-translate validation messages in validation.php but take care of :attribute variable

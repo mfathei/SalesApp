@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Session;
 
 // for DataTables grid
 require_once ( __DIR__ . '/../ssp.class.php' );
@@ -140,11 +141,40 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        //
+        try{
 
-        dd(request('active'));
+            $this->validate($request,[
+                'name' => 'required|min:3|max:190',
+                'address' => 'required|min:3|max:190',
+                'email' => 'required|email',
+                'phone' => 'required|min:3|max:100',
+                'first_balance' => 'required|numeric',
+                'balance' => 'required|numeric'
+            ]);
+
+            $cust = Customer::find($id);
+            $cust->name = request('name');
+            $cust->address = request('address');
+            $cust->email = request('email');
+            $cust->phone = request('phone');
+            $cust->fax = request('fax');
+            $cust->first_balance = request('first_balance');
+            $cust->balance = request('balance');
+            $cust->limit = request('limit');
+            $cust->notes = request('notes');
+            $cust->active = request('active') ? 1: 0;
+
+            $cust->save();
+
+            Session::flash('success', 'Customer updated successfully');
+            
+        } catch(Exception $ex){
+            Session::flash('error', "Can't update this Customer");
+        }
+
+        return redirect('/customers');
     }
 
     /**
@@ -155,8 +185,14 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
-        DB::table('customers')->where('id', $id)->delete();
+        try{
+
+            DB::table('customers')->where('id', $id)->delete();
+            Session::flash('success', "Customer $id deleted successfully");
+
+        } catch(Exception $ex){
+            Session::flash('error', "Can't delete this Customer");
+        }
 
         return redirect('/customers');
     }
