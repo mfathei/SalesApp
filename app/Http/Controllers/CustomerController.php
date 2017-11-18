@@ -73,8 +73,8 @@ class CustomerController extends Controller
         $sql_details = array(
 		    'user' => env('DB_USERNAME'),
 		    'pass' => env('DB_PASSWORD'),
-		    'db'   => env('DB_DATABASE'),
-		    'host' => env('DB_HOST')
+		    'db'   => env('DB_DATABASE') . ";charset=UTF8",
+            'host' => env('DB_HOST')
 		);
  
 		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -97,7 +97,19 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        $lastId = $this->nextId();
+        return view('customers.create', array('new_id' => ++$lastId));
+    }
+
+    /**
+     * Get the next id for a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    private function nextId()
+    {
+        $cust = DB::table('customers')->select(DB::raw('max(id) as max_id'))->first();
+        return $cust->max_id;
     }
 
     /**
@@ -108,7 +120,40 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+
+            $this->validate($request,[
+                'id'   => 'required|numeric|min:1',
+                'name' => 'required|unique:customers|min:3|max:190',
+                'address' => 'required|min:3|max:190',
+                'email' => 'required|unique:customers|email',
+                'phone' => 'required|min:3|max:100',
+                'first_balance' => 'required|numeric',
+                'balance' => 'required|numeric'
+            ]);
+
+            $cust = new Customer();
+            $cust->id = request('id');
+            $cust->name = request('name');
+            $cust->address = request('address');
+            $cust->email = request('email');
+            $cust->phone = request('phone');
+            $cust->fax = request('fax');
+            $cust->first_balance = request('first_balance');
+            $cust->balance = request('balance');
+            $cust->limit = request('limit');
+            $cust->notes = request('notes');
+            $cust->active = request('active') ? 1: 0;
+
+            $cust->save();
+
+            Session::flash('success', 'Customer created successfully');
+            
+        } catch(Exception $ex){
+            Session::flash('error', "Can't create this Customer");
+        }
+
+        return redirect('/customers');
     }
 
     /**

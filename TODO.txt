@@ -1,1 +1,2 @@
 -translate validation messages in validation.php but take care of :attribute variable
+-expand hr from the first column to all columns in customers grid   $('<hr class="style-four">').appendTo('#custs_table');

@@ -18,6 +18,7 @@ return [
     'edit_active' => 'Active',
     'edit_submit' => 'Save',
     'edit_title' => 'Customer Info',
+    'create_title' => 'Create Customer',
     'th_created' => 'Created At',
     'th_updated' => 'Updated At',
     'th_action' => 'Actions',

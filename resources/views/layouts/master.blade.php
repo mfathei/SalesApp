@@ -6,7 +6,7 @@
 
 <body>
 
-<div class="container">
+<div class="container-fluid">
 
     @if (Session::has('success'))
 
@@ -52,7 +52,7 @@
 
 @include('layouts.nav')
 
-<div class="container">
+<div class="container-fluid">
 
     @yield('content')
 

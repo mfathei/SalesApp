@@ -12,8 +12,8 @@
         </div>
 
         <div class="col-sm-offset-10 col-sm-2">
-            <form action="">
-                <input type="button" class="btn-primary btn-lg" value="{{ Lang::get('customers.add') }}">
+            <form action="/customers/create">
+                <input type="submit" class="btn-primary btn-lg" value="{{ Lang::get('customers.add') }}">
             </form>
         </div>
     </div>
@@ -124,6 +124,8 @@ $(document).ready(function() {
         }
     } );
  
+    $('<hr class="style-four">').appendTo('#custs_table');
+
     // DataTable
     var tbl = $('#custs_table').DataTable({
         // "scrollX": true, // horizontal scroll
@@ -204,7 +206,6 @@ $(document).ready(function() {
         } );
     } );
 
-    $('#custs_table tbody').append('<br/>');
 
 } );
 </script>
