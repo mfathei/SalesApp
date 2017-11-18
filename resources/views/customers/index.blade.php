@@ -154,7 +154,7 @@ $(document).ready(function() {
             }
         ],
         "language": {
-            "url": ""
+            "url": "<?php echo $langUrl; ?>"
         },
         "processing": true,
         "serverSide": true,
